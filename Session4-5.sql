@@ -21,7 +21,12 @@ VALUES ('Nguyễn Văn Huy','IT','Developer','18000000','1000000','2021'),
 SELECT * FROM Employee_Payroll.Employees;
 
 --- 1. Xóa các bản ghi trùng nhau hoàn toàn về tên, phòng ban và vị trí
---- Chưa giải được
+DELETE FROM Employee_Payroll.Employees
+WHERE employee_id NOT IN (
+    SELECT MIN(employee_id)
+    FROM Employees
+    GROUP BY full_name, department, position
+);
 
 --- 2. Cập nhật lương thưởng
 --- a. Tăng 10% lương cho những nhân viên làm trong phòng IT có lương dưới 18000000
